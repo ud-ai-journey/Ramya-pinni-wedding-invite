@@ -232,3 +232,24 @@ body, .cd b, .dnum, .f-date b, .savedate b, .dribbon b, .e-date b, .item .t { fo
 .pop-t b { white-space: nowrap; font-size: 20px; }
 .pop-t { transition: opacity .5s; }
 .mapbox.joined .pop-t { opacity: 0; }
+
+/* ======== scroll hint: impossible to miss ======== */
+.hint { position: absolute; left: 50%; bottom: calc(4.5vh + env(safe-area-inset-bottom)); transform: translateX(-50%); z-index: 6;
+  display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 12px 26px 10px; border-radius: 999px; cursor: pointer;
+  background: rgba(62,10,21,.88); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); color: #FFF3E0; text-shadow: none;
+  box-shadow: 0 0 0 1px #D9BC7E, 0 0 0 5px rgba(217,188,126,.25), 0 12px 30px rgba(40,6,13,.45); font-size: inherit; letter-spacing: 0; }
+.hint .hl { font-family: var(--caps); font-weight: 500; font-size: 14px; letter-spacing: .28em; color: #F3D893; }
+.hint .hs { font-style: italic; font-size: 15px; opacity: .9; }
+.chev { position: relative; width: 22px; height: 20px; margin-top: 4px; }
+.chev i { position: absolute; left: 50%; width: 12px; height: 12px; margin-left: -6px; border-right: 2px solid #F3D893; border-bottom: 2px solid #F3D893; transform: rotate(45deg); animation: chev 1.4s ease-in-out infinite; }
+.chev i:nth-child(1) { top: -2px; } .chev i:nth-child(2) { top: 6px; animation-delay: .2s; }
+@keyframes chev { 0% { opacity: 0; transform: translateY(-4px) rotate(45deg); } 50% { opacity: 1; } 100% { opacity: 0; transform: translateY(6px) rotate(45deg); } }
+.hint-mini { position: absolute; left: 50%; bottom: calc(3vh + env(safe-area-inset-bottom)); transform: translateX(-50%); z-index: 6; width: 48px; height: 48px; border-radius: 50%; opacity: 0; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; background: rgba(62,10,21,.82); box-shadow: 0 0 0 1px #D9BC7E, 0 8px 22px rgba(40,6,13,.4); }
+.hint-mini .chev { margin-top: 0; }
+.hint.nudge { animation: nudge 1.6s ease-in-out infinite; }
+.hint-mini.nudge { animation: nudge2 1.6s ease-in-out infinite; }
+@keyframes nudge { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(-8px); box-shadow: 0 0 0 1px #D9BC7E, 0 0 0 10px rgba(217,188,126,.18), 0 16px 34px rgba(40,6,13,.45); } }
+@keyframes nudge2 { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(-7px); } }
+.hint { width: max-content; max-width: 90vw; white-space: nowrap; font-family: var(--serif); }
+.hint .hs { font-family: var(--serif); text-transform: none; letter-spacing: 0; }

@@ -177,7 +177,8 @@ function draw(p) {
   chC.style.height = Math.min(H * .54, Wd * .9 / AR.C) + 'px'; chC.style.left = '50%';
   chC.style.opacity = c; chC.style.transform = `translateX(-50%) translateY(${(1 - c) * 40}px)`;
   caps.forEach(([el, a, b2]) => { const o = win(p, a, b2); el.style.opacity = o; el.style.transform = `translateY(${(1 - o) * 14}px)`; });
-  $('hint').style.opacity = 1 - seg(p, .01, .05);
+  const h0 = 1 - seg(p, .02, .05); $('hint').style.opacity = h0; $('hint').style.pointerEvents = h0 > .5 ? 'auto' : 'none';
+  const hm = seg(p, .04, .07) * (1 - seg(p, .93, .97)); $('hintMini').style.opacity = hm; $('hintMini').style.pointerEvents = hm > .5 ? 'auto' : 'none';
   $('prog').firstElementChild.style.height = p * 100 + '%';
 }
 let pTarget = 0, pCur = -1, raf = 0;
@@ -189,7 +190,13 @@ function loop() {
   raf = pCur !== pTarget ? requestAnimationFrame(loop) : 0;
 }
 const kick = () => { measure(); if (!raf) raf = requestAnimationFrame(loop); };
-addEventListener('scroll', kick, { passive: true }); addEventListener('resize', () => { pCur = -1; kick(); }); kick();
+addEventListener('scroll', kick, { passive: true });
+/* scroll hint: tap to advance; pulse if the guest hasn't scrolled for a while */
+const advance = () => scrollBy({ top: innerHeight * .9, behavior: 'smooth' });
+$('hint').addEventListener('click', advance); $('hintMini').addEventListener('click', advance);
+let idle; const armIdle = () => { clearTimeout(idle); $('hint').classList.remove('nudge'); $('hintMini').classList.remove('nudge');
+  idle = setTimeout(() => { $('hint').classList.add('nudge'); $('hintMini').classList.add('nudge'); }, 3500); };
+addEventListener('scroll', armIdle, { passive: true }); armIdle(); addEventListener('resize', () => { pCur = -1; kick(); }); kick();
 
 /* test hooks: ?open · ?col=<px> */
 const q = new URLSearchParams(location.search);
