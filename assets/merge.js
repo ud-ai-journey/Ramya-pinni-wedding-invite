@@ -72,7 +72,7 @@ $('track').addEventListener('scroll', () => { const tr = $('track'), w = tr.firs
   [...$('dots').children].forEach((d, j) => d.classList.toggle('on', j === i)); }, { passive: true });
 let n = 2; $('form').addEventListener('click', e => { const d = e.target.dataset.d; if (d) { n = clamp(n + +d, 1, 20); $('n').textContent = n; } });
 $('form').addEventListener('submit', e => { e.preventDefault(); const f = new FormData(e.target);
-  const msg = `RSVP · Ramyashruthi & Shambu's wedding\n\nName: ${f.get('name')}\n${f.get('att')}\nGuests: ${n}\nEvents: ${f.getAll('ev').join(', ') || '—'}${f.get('wish') ? `\n\nWish: ${f.get('wish')}` : ''}`;
+  const msg = `RSVP · Ramyashruthi & Shambu Nair's wedding\n\nName: ${f.get('name')}\n${f.get('att')}\nGuests: ${n}\nEvents: ${f.getAll('ev').join(', ') || '—'}${f.get('wish') ? `\n\nWish: ${f.get('wish')}` : ''}`;
   window.open(`https://wa.me/${W.whatsapp}?text=${encodeURIComponent(msg)}`, '_blank'); e.target.style.display = 'none'; $('thanks').classList.add('on'); });
 const io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } }), { threshold: .15, rootMargin: '0px 0px -8% 0px' });
 document.querySelectorAll('.rv').forEach(el => io.observe(el));
@@ -114,7 +114,7 @@ const IM = (() => {
     if (on.k && on.a) setTimeout(join, 1700);
   }
   function join() {
-    joined = true; const arc = $('imArc'); arc.style.opacity = 1;
+    joined = true; box.classList.add('joined'); const arc = $('imArc'); arc.style.opacity = 1;
     arc.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 600, fill: 'forwards' });
     const meetK = [kodP[0] - 13, kodP[1] - 2], meetA = [kodP[0] + 13, kodP[1] - 2];
     [[$('popK'), spotK, meetK], [$('popA'), spotA, meetA]].forEach(([el, a, b]) => {
@@ -126,7 +126,7 @@ const IM = (() => {
       sparks(hp, '#F3D893'); $('unlock').classList.add('on'); $('playHint').textContent = 'Two states, one heart'; }, 1900);
   }
   function reset() {
-    on = { k: false, a: false }; joined = false; $('unlock').classList.remove('on'); $('popA').classList.remove('face-l');
+    on = { k: false, a: false }; joined = false; box.classList.remove('joined'); $('unlock').classList.remove('on'); $('popA').classList.remove('face-l');
     [$('popK'), $('popA'), $('imHeart'), $('imArc')].forEach(el => { el.getAnimations().forEach(a => a.cancel()); });
     states['Kerala'].setAttribute('class', 'st k tap'); states['Andhra Pradesh'].setAttribute('class', 'st a tap');
     $('chipK').style.opacity = 1; $('chipA').style.opacity = 1; $('imArc').style.opacity = 0; $('playHint').innerHTML = 'Tap <b class="tk">Kerala</b> and <b class="ta">Andhra</b> on the map';

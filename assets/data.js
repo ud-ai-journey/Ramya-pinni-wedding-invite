@@ -41,7 +41,7 @@ WEDDING.calLink = ev => {
   const [d, t] = ev.start.split('T'); const [Y, M, D] = d.split('-').map(Number); const [h, m] = t.split(':').map(Number);
   const s = new Date(Date.UTC(Y, M - 1, D, h, m) - 330 * 60000), e = new Date(s.getTime() + ev.hours * 3600000);
   const f = x => x.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
-  const text = `${ev.title} · Ramyashruthi & Shambu`;
+  const text = `${ev.title} · Ramyashruthi & Shambu Nair`;
   return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(text)}&dates=${f(s)}/${f(e)}&ctz=Asia/Kolkata&location=${encodeURIComponent(ev.venue + ', ' + ev.town)}&details=${encodeURIComponent('With love, the Meeniga & Nair families')}`;
 };
 WEDDING.mapLink = ev => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(ev.venue + ', ' + ev.town)}`;

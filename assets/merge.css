@@ -225,3 +225,10 @@
 .unlock .date b { font-weight: 600; color: #F3D893; }
 .unlock .sub { color: var(--ivory); opacity: .9; font-style: normal; font-weight: 500; }
 body, .cd b, .dnum, .f-date b, .savedate b, .dribbon b, .e-date b, .item .t { font-variant-numeric: lining-nums; font-feature-settings: "lnum" 1; }
+/* front-facing portraits: no mirroring */
+#popK img, #popA img, #popA.face-l img { transform: none; object-position: 50% 30%; }
+.portrait img { object-position: 50% 25%; }
+.person .face { object-fit: cover; object-position: 50% 28%; }
+.pop-t b { white-space: nowrap; font-size: 20px; }
+.pop-t { transition: opacity .5s; }
+.mapbox.joined .pop-t { opacity: 0; }
